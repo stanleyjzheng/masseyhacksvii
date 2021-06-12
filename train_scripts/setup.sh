@@ -1,5 +1,7 @@
 conda create --name masseyhacks python=3.8 anaconda
 conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia
+pip install -r requirements_train.txt
+
 mkdir input
 cd input
 kaggle datasets download -d cdeotte/jpeg-isic2019-256x256
