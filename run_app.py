@@ -43,7 +43,7 @@ def skintonepredict():
 def predict():
     return render_template("predict.html")
 
-@app.route('/predictskin', methods=['POST'])
+@app.route('/skintonepredict', methods=['POST'])
 def predictskin():
     imagefile=request.files["imagefile"]
     image_path= "./templates/" + imagefile.filename
@@ -54,6 +54,6 @@ def predictskin():
 
     
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 5001))
     app.run(host='0.0.0.0', port = port)
 
