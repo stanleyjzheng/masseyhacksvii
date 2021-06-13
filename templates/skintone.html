@@ -23,19 +23,41 @@
     <div class="container">
         <div id="content" style="margin-top:2em"></div>
     </div>
+  
     
   <div class="container">
     <form action="/skintonepredict" method="post" role="form" class="php-email-form">
+      <div class="form-group">
+        <label for="gender">Age</label>
+        <input type="number" class="form-control" name="age" placeholder="Enter your Age (numbers)">
+        <small id="emailHelp" class="form-text text-muted">Your info is completely secure.</small>
+      </div>        
+      
         <div class="form-group">
           <label for="gender">Gender</label>
           <input type="text" class="form-control" name="gender" placeholder="Enter your gender">
           <small id="emailHelp" class="form-text text-muted">Your info is completely secure.</small>
         </div>
+        <label for="cars">Enter your gender:</label>
+
+<select name="cars" id="cars">
+  <option value="volvo">female</option>
+  <option value="saab">male</option>
+  <option value="mercedes">gay</option>
+  <option value="audi">lesbian</option>
+</select>
         <div class="form-group">
           <label for="">Area of Lesion</label>
           <input type="text" name = "area" class="form-control" id="exampleInputPassword1" placeholder="Enter the area of the lesion">
-        
+          <label for="cars">Enter the Area of Lesion:</label> 
+          <select name="cars" id="cars">
+            <option value="volvo">torso</option>
+            <option value="saab">mouth</option>
+            <option value="mercedes">balls</option>
+            <option value="audi">genitals</option>
+          </select>
           <section class="section-preview">
+
             <br><br>
               <div class="file-field">
                 <div class="btn btn-primary btn-sm float-left waves-effect waves-light">

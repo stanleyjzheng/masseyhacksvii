@@ -4,10 +4,7 @@
 # In[2]:
 
 
-from load_model import *
-from face_detecter import *
-from extract_bottleneck_features import *
-from flask import request, url_for, Flask, render_template
+from flask import request, url_for, Flask, render_template, request
 from werkzeug.utils import secure_filename
 import os
 import sys
@@ -16,6 +13,8 @@ from keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input
 import numpy as np
 import io
+from src.skin_color import estimate_skin
+from src.skin_color import predict
 from PIL import Image
 
 app = Flask(__name__)
@@ -33,8 +32,9 @@ def skintonepredict():
     if request.method == 'POST':
         gender = request.form["gender"]
         area = request.form["area"]
+        age = request.form["age"]
         print(area,gender)
-    return render_template("skintonepredict.html", gender=gender,area=area)
+    return render_template("skintonepredict.html", gender=gender,area=area, age=age)
 
 @app.route('/predict')
 def predict():
@@ -42,11 +42,24 @@ def predict():
 
 @app.route('/predictskin', methods=['POST'])
 def predictskin():
-    if request.method == 'POST':
+    imagefile=request.files["imagefile"]
+    image_path= "./templates/" + imagefile.filename
+    imagefile.save(image_path)
+    result = predict(image_path)
+    #image=load_img(image_path, target_size=(224,224))
+    #image = img_to_array(image)
+    #image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+    #image=preprocess_input(image)
+    #pred = model.predict(image)
+    #label = decode_predictions(pred)
+    #label = label[0][0]
+
+    return render_template('predict.html', result=result)
+    #if request.method == 'POST':
         #gender = request.form["gender"]
         #area = request.form["area"]
-        output = "melanoma detected"
-    return render_template("predictskin.html", output=output)
+    #    output = "melanoma detected"
+    #return render_template("predictskin.html", output=output)
 
 
 """
