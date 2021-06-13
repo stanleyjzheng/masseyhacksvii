@@ -51,16 +51,16 @@ def predict(image_path, age, site, gender):
     gender_map = {'male': 1, 'female': 0}
 
     site_map = {
-        'site_anterior torso': 0,
-        'site_head/neck': 1,
-        'site_lateral torso': 2,
-        'site_lower extremity': 3,
-        'site_oral/genital': 4,
-        'site_palms/soles': 5,
-        'site_posterior torso': 6,
-        'site_torso': 7,
-        'site_upper extremity': 8,
-        'site_nan': 9
+        'anterior torso': 0,
+        'head/neck': 1,
+        'lateral torso': 2,
+        'lower extremity': 3,
+        'oral': 4,
+        'palms/soles': 5,
+        'posterior torso': 6,
+        'torso': 7,
+        'upper extremity': 8,
+        'none of the above': 9
     }
 
     gender = gender_map[gender]
