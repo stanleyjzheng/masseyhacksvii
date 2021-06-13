@@ -45,7 +45,7 @@ def cache_model(enet_type, device, model_file):
     return model
 
 
-def predict(image_path, age, site, gender):
+def predict_test(image_path, age, site, gender):
     image_size = 9.783024603416145 # average since this is not relevant to our dataset
 
     gender_map = {'male': 1, 'female': 0}

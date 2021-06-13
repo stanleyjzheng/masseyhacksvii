@@ -54,9 +54,9 @@ def estimate_skin(image_path):
 
     skin_tone_img = np.array([[skin_tone_estimate_BGR]*height]*width).astype(np.uint8)
     print(skin_tone_img.shape)
-    cv2.imwrite('../input/orig.jpg', img_BGR)
-    cv2.imwrite('../input/segment.jpg', img_face_only)
-    cv2.imwrite('../input/colour.jpg', skin_tone_img)
+    cv2.imwrite('orginal.jpg', img_BGR)
+    cv2.imwrite('segment.jpg', img_face_only)
+    cv2.imwrite('color.jpg', skin_tone_img)
 
     obj = DeepFace.analyze(img_path=image_path, actions=['race'])
 

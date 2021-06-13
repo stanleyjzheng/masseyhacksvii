@@ -3,7 +3,6 @@
 ### Change components part
 ## Add ml function to 
 
-# In[2]:
 
 
 from flask import request, url_for, Flask, render_template, request
@@ -14,7 +13,7 @@ import tensorflow as tf
 import numpy as np
 import io
 from src.skin_color import estimate_skin
-from src.infer import predict
+from src.infer import predict_test
 from PIL import Image
 
 app = Flask(__name__)
@@ -35,7 +34,7 @@ def skintonepredict():
     imagefile=request.files["imagefile"]
     image_path= "./templates/" + imagefile.filename
     imagefile.save(image_path)
-    output=age
+    output = predict_test(image_path, age, area, gender)
     return render_template("skintonepredict.html", output=output)
 
 @app.route('/predict')
