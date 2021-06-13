@@ -11,8 +11,6 @@ from werkzeug.utils import secure_filename
 import os
 import sys
 import tensorflow as tf
-from keras.preprocessing import image 
-from keras.applications.resnet50 import preprocess_input
 import numpy as np
 import io
 from src.skin_color import estimate_skin
