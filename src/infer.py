@@ -69,7 +69,7 @@ def predict(image_path, age, site, gender):
     site_oh = np.zeros(10)
     site_oh[site_map[site]] += 1
 
-    metadata = [gender, age, 1, image_size] + site_oh
+    metadata = [gender, age, 1, image_size] + site_oh.tolist()
 
     print(metadata)
 
@@ -118,4 +118,4 @@ def process_preds(preds):
 
 
 if __name__ == '__main__':
-    predict('../input/jpeg-melanoma-256x256/train/ISIC_8901784.jpg', [1, 1, 1, 1, 1, 1])
+    print(process_preds(predict('../input/jpeg-melanoma-256x256/train/ISIC_8901784.jpg', 42, 'oral', 'female')))
