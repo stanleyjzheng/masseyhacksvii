@@ -48,7 +48,7 @@ def cache_model(enet_type, device, model_file):
 def predict_test(image_path, age, site, gender):
     image_size = 9.783024603416145 # average since this is not relevant to our dataset
 
-    gender_map = {'male': 1, 'female': 0}
+    gender_map = {'Male': 1, 'Female': 0}
 
     site_map = {
         'anterior torso': 0,
@@ -84,7 +84,7 @@ def predict_test(image_path, age, site, gender):
     image = torch.tensor(image).float().to(device)
     metadata = torch.tensor(metadata).float().to(device)
 
-    model = cache_model('efficientnet-b7', device, '../input/model/9c_b7ns_1e_640_ext_15ep_best_fold0.pth')
+    model = cache_model('efficientnet-b7', device, './input/model/9c_b7ns_1e_640_ext_15ep_best_fold0.pth')
 
     logits = model(image.unsqueeze(axis=0), metadata)
     probs = logits.softmax(1).detach().cpu().numpy()

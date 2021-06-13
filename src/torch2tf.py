@@ -3,6 +3,7 @@ from torch.autograd import Variable
 import onnx
 import tensorflow as tf
 import onnx_tf
+import geffnet
 
 def cache_model(enet_type, device, model_file):
     model = EffnetMeta(enet_type, n_meta_features=0, out_dim=9)
@@ -18,7 +19,7 @@ class EffnetMeta(torch.nn.Module):
 
         super(EffnetMeta, self).__init__()
         self.n_meta_features = n_meta_features
-        self.enet = geffnet.create_model(enet_type.replace('-', '_'), pretrained=load_pretrained)
+        self.enet = geffnet.create_model(enet_type.replace('-', '_'), pretrained=load_pretrained) # scriptable=True
         self.dropout = torch.nn.Dropout(0.5)
 
         in_ch = self.enet.classifier.in_features
@@ -38,7 +39,7 @@ if __name__ == '__main__':
     device = torch.device('cuda')
     model = cache_model('efficientnet-b7', device, '../input/model/9c_b7ns_1e_640_ext_15ep_best_fold0.pth')
 
-    dummy_input = Variable(torch.randn(1, 1, 28, 28))
+    dummy_input = Variable(torch.randn(1, 3, 640, 640))
     torch.onnx.export(model, dummy_input, "../model/9c_b7ns_1e_640_ext_15ep_best_fold0.onnx")
 
     onnx_model = onnx.load("../model/9c_b7ns_1e_640_ext_15ep_best_fold0.onnx")
