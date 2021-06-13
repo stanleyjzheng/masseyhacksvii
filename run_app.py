@@ -34,10 +34,11 @@ def skintonepredict():
     gender = request.form["gender"]
     area = request.form["area"]
     age = int(request.form["age"])
-    imagefile=request.files["namefile"]
-    name_path= "./templates/" + imagefile.filename
-    imagefile.save(name_path)
-    return render_template("skintonepredict.html", output=age)
+    imagefile=request.files["imagefile"]
+    image_path= "./templates/" + imagefile.filename
+    imagefile.save(image_path)
+    output=age
+    return render_template("skintonepredict.html", output=output)
 
 @app.route('/predict')
 def predict():

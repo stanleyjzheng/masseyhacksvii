@@ -27,7 +27,7 @@
   
     
   <div class="container">
-    <form action="/skintonepredict" method="post" role="form" class="php-email-form">
+    <form action="/skintonepredict" method="post" enctype="multipart/form-data" role="form" class="php-email-form">
       <div class="form-group">
         <label for="gender">Age</label>
         <input type="number" class="form-control" name="age" placeholder="Enter your Age (numbers)">
@@ -68,17 +68,16 @@
         <br>
         
 
-        
-    </form>
+
   </div>  
 
   <div class="container mt-3">
     <h2>Upload File for Analysis</h2>
     <p>Please upload an image of skin. Our machine learning algorithm will identify if the image contains a variant or form of skin cancer.</p>
-    <form action="/predictskin" method="post" enctype="multipart/form-data">
+
       <p>Custom file:</p>
       <div class="custom-file mb-3">
-        <input type="file" class="custom-file-input" id="namefile" name="namefile">
+        <input type="file" class="custom-file-input" id="imagefile" name="imagefile">
         <label class="custom-file-label" for="customFile">Choose file</label>
       </div>
       
