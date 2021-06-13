@@ -59,7 +59,7 @@ def predict(image_path, metadata):
 
     model = cache_model('efficientnet-b7', device, '../input/model/9c_b7ns_1e_640_ext_15ep_best_fold0.pth')
 
-    logits = model(image, metadata)
+    logits = model(image.unsqueeze(axis=0), metadata)
     probs = logits.softmax(1).detach().cpu().numpy()
     return probs
 
@@ -81,11 +81,11 @@ def process_preds(preds):
     out = classes[m]
 
     if preds[0, 6]>0.5:
-        melanoma_risk='High'
+        melanoma_risk = 'High'
     elif preds[0, 6]<0.5 and preds[0, 6] > 0.3:
-        melanoma_risk='Medium'
+        melanoma_risk = 'Medium'
     else:
-        melanoma_risk='Low'
+        melanoma_risk = 'Low'
 
     return out, melanoma_risk
 
