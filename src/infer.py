@@ -45,7 +45,34 @@ def cache_model(enet_type, device, model_file):
     return model
 
 
-def predict(image_path, metadata):
+def predict(image_path, age, site, gender):
+    image_size = 9.783024603416145 # average since this is not relevant to our dataset
+
+    gender_map = {'male': 1, 'female': 0}
+
+    site_map = {
+        'site_anterior torso': 0,
+        'site_head/neck': 1,
+        'site_lateral torso': 2,
+        'site_lower extremity': 3,
+        'site_oral/genital': 4,
+        'site_palms/soles': 5,
+        'site_posterior torso': 6,
+        'site_torso': 7,
+        'site_upper extremity': 8,
+        'site_nan': 9
+    }
+
+    gender = gender_map[gender]
+    age /= 90
+
+    site_oh = np.zeros(10)
+    site_oh[site_map[site]] += 1
+
+    metadata = [gender, age, 1, image_size] + site_oh
+
+    print(metadata)
+
     device = torch.device('cuda')
 
     image = cv2.imread(image_path)
