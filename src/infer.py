@@ -51,7 +51,6 @@ def predict(image_path, metadata):
     image = cv2.imread(image_path)
     image = image[:, :, ::-1]
     res = transforms_val(640)(image=image)
-    print(res)
     image = res['image'].astype(np.float32)
     image = image.transpose(2, 0, 1)
 
@@ -61,8 +60,35 @@ def predict(image_path, metadata):
     model = cache_model('efficientnet-b7', device, '../input/model/9c_b7ns_1e_640_ext_15ep_best_fold0.pth')
 
     logits = model(image, metadata)
-    probs = logits.softmax(1).detach().cpu()
+    probs = logits.softmax(1).detach().cpu().numpy()
     return probs
+
+
+def process_preds(preds):
+    classes = {
+        0: 'Actinic Keratosis',
+        1: 'Basal Cell Carcinoma',
+        2: 'Benign Keratosis',
+        3: 'Dermatofibroma',
+        4: 'Squamous Cell Carcinoma',
+        5: 'Vascular Lesion',
+        6: 'Melanoma',
+        7: 'Nevus',
+        8: 'Unknown'
+    }
+
+    m = np.argmax(preds[0])
+    out = classes[m]
+
+    if preds[0, 6]>0.5:
+        melanoma_risk='High'
+    elif preds[0, 6]<0.5 and preds[0, 6] > 0.3:
+        melanoma_risk='Medium'
+    else:
+        melanoma_risk='Low'
+
+    return out, melanoma_risk
+
 
 if __name__ == '__main__':
     predict('../input/jpeg-melanoma-256x256/train/ISIC_8901784.jpg', [1, 1, 1, 1, 1, 1])
