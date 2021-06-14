@@ -1,9 +1,4 @@
 #### This document is intended to be a complement to the video.
-
-## Who we are
-Hi! I'm Stanley, SDE Intern at Kings Distributed Systems/Distributed Computer.
-I mainly work on ML tasks, and spend my free time on Kaggle - Google's data science competitions platform, where I am ranked 1100th globally - the majority of my experience is in medical imaging.
-
 ## Inspiration
 We were inspired by an app: [skinvision.com](https://skinvision.com). 
 They charge $10 per scan of lesions. 
